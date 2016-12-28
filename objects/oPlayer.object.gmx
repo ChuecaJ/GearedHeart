@@ -29,8 +29,64 @@
 var kLeft = false;
 var kJump = false;
 
+vx = 0;
+vy = 0;
+cx = 0;
+cy = 0;
+
 
 gravity_direction = 270;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Apply Movement
+
+//Sub-pixel movement
+var vxNew, vyNew;
+
+cx += vx;
+cy += vy;
+vxNew = round(cx);
+vyNew = round(cy);
+cx -= vxNew;
+cy -= vyNew;
+
+repeat(abs(vyNew)) {
+    if (place_meeting(x, y, oBlock)){
+        y += sign(vy);
+    }else {
+        vy = 0;
+        break;
+    }
+}
+
+repeat(abs(vxNew)) {
+    if (place_meeting(x, y, oBlock)){
+        x += sign(vx);
+    }else {
+        vx = 0;
+        break;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -53,7 +109,9 @@ gravity_direction = 270;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>kRight = keyboard_check(ord('D'))  ||  keyboard_check(vk_right);
+            <string>///Movement
+
+kRight = keyboard_check(ord('D'))  ||  keyboard_check(vk_right);
 kLeft = keyboard_check(ord('A'))   ||  keyboard_check(vk_left);
 kJump = keyboard_check(vk_space)   ||  keyboard_check_pressed(vk_up);
 
