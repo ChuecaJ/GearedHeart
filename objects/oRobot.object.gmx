@@ -57,41 +57,58 @@ gravity_direction = 270;
 key_left = keyboard_check(ord('A'));
 key_jump = keyboard_check(vk_space);
 
+
 if (key_right || key_left){
     if (key_right = true){
-        hspeed = 5
+        hspeed = 10;
     }else if (key_left = true){
-        hspeed = -5;
+        hspeed = -10;
     }
-} else if (!key_right || !key_left){
+}else if (!key_right || !key_left){
     hspeed = 0;
 }
 
-if (key_jump &amp;&amp; place_meeting(x, y, oBlock)){
-    vspeed = -20;
-} 
-else if(place_free(x, y)){
-    gravity = 2;
-}
-else
-{
-gravity = 0;
-vspeed = 0;
+if (place_meeting(x, y, oBlock)){
+    if (key_jump){
+        vspeed = -15;
+    }else{
+        gravity = 0;
+        vspeed = 0;
+    }
+}else if(!place_meeting(x, y, oBlock)){
+        gravity = 1.5;
 }
 
-/*if (!place_meeting(x, y+5, oBlock)){
-    
-} else {
-    gravity = 0;
-    vspeed = 0;
-}*/
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_text (50, 50, key_jump);
 </string>
           </argument>
         </arguments>
       </action>
     </event>
   </events>
-  <PhysicsObject>-1</PhysicsObject>
+  <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>
   <PhysicsObjectDensity>0.5</PhysicsObjectDensity>
@@ -102,8 +119,5 @@ vspeed = 0;
   <PhysicsObjectFriction>0.200000002980232</PhysicsObjectFriction>
   <PhysicsObjectAwake>-1</PhysicsObjectAwake>
   <PhysicsObjectKinematic>0</PhysicsObjectKinematic>
-  <PhysicsShapePoints>
-    <point>0,0</point>
-    <point>16,16</point>
-  </PhysicsShapePoints>
+  <PhysicsShapePoints/>
 </object>
