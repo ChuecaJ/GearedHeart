@@ -7,13 +7,13 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\sBlock</sprite>
-    <sprite>sprites\sRobot</sprite>
+    <sprite>sprites\sPlayer</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <objects name="objects">
     <object>objects\oBlock</object>
-    <object>objects\oRobot</object>
+    <object>objects\oPlayer</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>
