@@ -34,8 +34,52 @@ vy = 0;
 cx = 0;
 cy = 0;
 
+platformTarget = 0;
+wallTarget     = 0;
 
-gravity_direction = 270;
+canStick = true;
+sticking = false;
+
+groundAccel = 1.00;
+groundFric  = 2.00;
+airAccel    = 1.00;
+airFric     = 0.01;
+vxMax       = 7.00;
+vyMax       = 18.0;
+gravNorm    = 0.70;
+gravSlide   = 0.30;
+
+clingTime   = 4.00;
+
+
+onGround = OnGround();
+
+//gravity_direction = 270;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Sticking
+
+sticking = false;
 </string>
           </argument>
         </arguments>
@@ -70,8 +114,12 @@ vyNew = round(cy);
 cx -= vxNew;
 cy -= vyNew;
 
+/*x += vx;
+y += vy;*/
+
+
 repeat(abs(vyNew)) {
-    if (place_meeting(x, y, oBlock)){
+    if (!PlatformCheck()){
         y += sign(vy);
     }else {
         vy = 0;
@@ -80,12 +128,17 @@ repeat(abs(vyNew)) {
 }
 
 repeat(abs(vxNew)) {
-    if (place_meeting(x, y, oBlock)){
+    if (!PlatformCheck()){
         x += sign(vx);
     }else {
         vx = 0;
         break;
     }
+}
+
+//Don't go thrugh the floor (ÑAPA until sides get done)
+/*if (place_meeting(x, y+1, platformTarget) &amp;&amp; place_meeting(x, y, platformTarget)){
+    y = platformTarget.y-32;
 }
 </string>
           </argument>
@@ -111,31 +164,79 @@ repeat(abs(vxNew)) {
             <kind>1</kind>
             <string>///Movement
 
+//Controls
 kRight = keyboard_check(ord('D'))  ||  keyboard_check(vk_right);
 kLeft = keyboard_check(ord('A'))   ||  keyboard_check(vk_left);
 kJump = keyboard_check(vk_space)   ||  keyboard_check_pressed(vk_up);
 
+//Platform to interact
+platformTarget = instance_nearest(x, y, oBlock);
 
-if (kRight || kLeft){
-    if (kRight = true){
-        hspeed = 10;
-    }else if (kLeft = true){
-        hspeed = -10;
-    }
-}else if (!kRight || !kLeft){
-    hspeed = 0;
+//Checkers
+cLeft  = place_meeting(x - 1, y, oBlock);
+cRight = place_meeting(x + 1, y, oBlock);
+if (cLeft){ 
+    wallTarget = instance_place(x - 1, y, oBlock);
+}
+if (cRight){ 
+    wallTarget = instance_place(x + 1, y, oBlock);
 }
 
-if (place_meeting(x, y, oBlock)){
-    if (kJump){
-        vspeed = -15;
-    }else{
-        gravity = 0;
-        vspeed = 0;
-    }
-}else if(!place_meeting(x, y, oBlock)){
-        gravity = 1.5;
+//Apply the correct acceleration
+var tempAccel, tempFric
+
+if (onGround) {  
+    tempAccel = groundAccel;
+    tempFric  = groundFric;
+} else {
+    tempAccel = airAccel;
+    tempFric  = airFric;
 }
+
+// Wall cling
+if ((!cRight &amp;&amp; !cLeft) || onGround) {
+    canStick = true;
+    sticking = false;
+} else if (((kRight &amp;&amp; cLeft) || (kLeft &amp;&amp; cRight)) &amp;&amp; canStick &amp;&amp; !onGround) {
+    alarm[0] = clingTime;
+    sticking = true; 
+    canStick = false;       
+}
+//Gravity while cling
+if ((cLeft || cRight) &amp;&amp; vy &gt;= 0) {
+    // Wall slide
+    vy = Approach(vy, vyMax * 0.33, gravSlide);
+} else {
+    // Fall normally
+    vy = Approach(vy, vyMax, gravNorm);
+}
+
+// Left 
+if (kLeft &amp;&amp; !kRight &amp;&amp; !sticking) {
+    // Apply acceleration left
+    if (vx &gt; 0){
+        vx = Approach(vx, 0, tempFric);  
+    } 
+    vx = Approach(vx, -vxMax, tempAccel);
+// Right
+} else if (kRight &amp;&amp; !kLeft &amp;&amp; !sticking) {
+    // Apply acceleration right
+    if (vx &lt; 0){
+        vx = Approach(vx, 0, tempFric);  
+    } 
+    vx = Approach(vx, vxMax, tempAccel);
+}
+
+// Friction
+if (!kRight &amp;&amp; !kLeft) {
+    vx    = Approach(vx, 0, tempFric);
+}
+
+
+
+
+
+
 
 </string>
           </argument>
@@ -159,7 +260,9 @@ if (place_meeting(x, y, oBlock)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text (50, 50, kJump);
+            <string>if (debug_mode){
+    draw_text (50, 50, OnGround());
+}
 </string>
           </argument>
         </arguments>

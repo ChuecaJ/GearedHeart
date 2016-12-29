@@ -13,6 +13,8 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\OnGround.gml</script>
+    <script>scripts\PlatformCheck.gml</script>
+    <script>scripts\Approach.gml</script>
   </scripts>
   <objects name="objects">
     <object>objects\oBlock</object>
