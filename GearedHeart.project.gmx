@@ -8,6 +8,7 @@
   <sprites name="sprites">
     <sprite>sprites\sBlock</sprite>
     <sprite>sprites\sPlayer</sprite>
+    <sprite>sprites\sCheck</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>

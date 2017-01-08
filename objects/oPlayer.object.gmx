@@ -25,27 +25,37 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>var kRight = false;
-var kLeft = false;
-var kJump = false;
+            <string>///Variables
 
+//Keyboard
+kRight = false;
+kLeft = false;
+kJump = false;
+//Velocity
 vx = 0;
 vy = 0;
+//Sub-pixel movement
 cx = 0;
 cy = 0;
 
-
+//Some variables
 groundAccel = 1.00;
 groundFric  = 2.00;
 airAccel    = 1.00;
-airFric     = 0.10;
-vxMax       = 7.00;
+airFric     = 0.01;
+vxMax       = 8.00;
 vyMax       = 18.0;
-gravNorm    = 0.70;
+jumpHeight  = 11.5;
+gravRise    = 0.65;
+gravFall    = 1.40;
 gravSlide   = 0.30;
 
 clingTime   = 4.00;
 
+//Wall and floor check
+cRight = instance_place(x+1, y, oBlock);
+cLeft  = instance_place(x-1, y, oBlock);
+platformTarget = instance_nearest(x, y, oBlock);
 
 onGround = OnGround();
 
@@ -96,6 +106,43 @@ sticking = false;
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Collisions
+
+//Vertical collision
+if(place_meeting(x, y+vy, oBlock)){
+    while(!place_meeting(x, y+sign(vy), oBlock)){
+        y+=sign(vy);
+    }
+    vy=0;
+}
+
+//Horizontal collision
+if(place_meeting(x+vx, y, oBlock)){
+    while(!place_meeting(x+sign(vx), y, oBlock)){
+        x+=sign(vx);
+    }
+    vx=0;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Apply Movement
 
 //Sub-pixel movement
@@ -110,11 +157,11 @@ cy -= vyNew;
 
 
 
-for(i=1; abs(vyNew); i++) {
+repeat (abs(vyNew)) {
     y += sign(vy);
 }
 
-for(i=1; abs(vxNew); i++) {
+repeat (abs(vxNew)) {
     x += sign(vx);
 }
 
@@ -143,12 +190,13 @@ for(i=1; abs(vxNew); i++) {
             <kind>1</kind>
             <string>///Movement
 
-//Controls
-kRight = keyboard_check(ord('D'))  ||  keyboard_check(vk_right);
-kLeft = keyboard_check(ord('A'))   ||  keyboard_check(vk_left);
-kJump = keyboard_check(vk_space)   ||  keyboard_check_pressed(vk_up);
+//Input
+kRight = keyboard_check(ord('D'));
+kLeft  = keyboard_check(ord('A'));
+kJump  = keyboard_check(vk_space);
 
-//Choose the right acceleration
+//Choose the right acceleration and friction
+onGround = OnGround();
 if(onGround){
     tempAccel = groundAccel;
     tempFric  = groundFric;
@@ -157,9 +205,93 @@ if(onGround){
     tempFric  = airFric;
 }
 
+//Choose the right gravity
+if(vy&gt;=0 || !kJump){
+    tempGrav=gravFall;
+}else if (kJump){
+    tempGrav=gravRise;
+}
+
+//Gravity
+if(!onGround){
+    vy = Approach(vy, vyMax, tempGrav);
+}else{
+    vy = 0;
+}
+
 //Right and Left
-if (kRight){
-    Approach(vx, vxMax, tempAccel);
+if (kRight &amp;&amp; !kLeft){
+    if(vx &lt; 0){
+        vx = Approach(vx, 0, tempFric);
+    }
+    vx = Approach(vx, vxMax, tempAccel);
+}else if (kLeft &amp;&amp; !kRight){
+    if(vx &gt; 0){
+        vx = Approach(vx, 0, tempFric);
+    }
+    vx = Approach(vx, -vxMax, tempAccel);
+}
+
+//Friction
+if(!kRight &amp;&amp; !kLeft){
+    vx = Approach(vx, 0, tempFric);
+}
+
+//Jump
+if (kJump &amp;&amp; onGround){
+    vy = -jumpHeight;
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Testing, debugging and panic buttons
+
+//Wall check
+/*
+cRight = instance_place(x+1, y, oBlock);
+cLeft  = instance_place(x-1, y, oBlock);
+
+oBlock.sprite_index = sBlock;
+if(cLeft != noone &amp;&amp; !place_meeting(x, y-1, oBlock)){
+    cLeft.sprite_index = sCheck;
+}else if (cRight != noone &amp;&amp; !place_meeting(x, y-1, oBlock)){
+    cRight.sprite_index = sCheck;
+}
+
+platformTarget.sprite_index = sCheck;
+*/
+variableTest = gravRise;
+changeTest   = 0.05;
+if(keyboard_check_pressed(vk_down)){
+    variableTest-=changeTest;
+}
+if(keyboard_check_pressed(vk_up)){
+    variableTest+=changeTest;
+}
+gravRise = variableTest;
+
+if(keyboard_check(ord('P'))){
+    x=100;
+    y=100;
+    vy=0;
+    vx=0;
 }
 </string>
           </argument>
@@ -183,7 +315,8 @@ if (kRight){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text (50, 50, kLeft);
+            <string>draw_text (50, 50, vx);
+draw_text (50, 65, variableTest);
 
 </string>
           </argument>
