@@ -206,13 +206,19 @@ if(onGround){
 }
 
 //Choose the right gravity
-if(vy&gt;=0 || !kJump){
+cRight = instance_place(x+1, y, oBlock);
+cLeft  = instance_place(x-1, y, oBlock);
+
+if((vy&gt;=0 || !kJump)){
     tempGrav=gravFall;
 }else if (kJump){
     tempGrav=gravRise;
 }
+if ((cLeft || cRight) &amp;&amp; vy&gt;=0){
+    tempGrav=gravSlide;
+}
 
-//Gravity
+//Apply gravity
 if(!onGround){
     vy = Approach(vy, vyMax, tempGrav);
 }else{
@@ -241,6 +247,14 @@ if(!kRight &amp;&amp; !kLeft){
 if (kJump &amp;&amp; onGround){
     vy = -jumpHeight;
 }
+
+//Wall jump
+if((cLeft || cRight) &amp;&amp; kJump){
+    
+}
+
+
+
 </string>
           </argument>
         </arguments>
@@ -273,11 +287,14 @@ if(cLeft != noone &amp;&amp; !place_meeting(x, y-1, oBlock)){
     cLeft.sprite_index = sCheck;
 }else if (cRight != noone &amp;&amp; !place_meeting(x, y-1, oBlock)){
     cRight.sprite_index = sCheck;
-}
+}*/
 
-platformTarget.sprite_index = sCheck;
-*/
-variableTest = gravRise;
+sprite_index = sPlayer;
+if(cLeft){
+    sprite_index = sCheck;
+}
+    
+/*variableTest = gravRise;
 changeTest   = 0.05;
 if(keyboard_check_pressed(vk_down)){
     variableTest-=changeTest;
@@ -285,7 +302,7 @@ if(keyboard_check_pressed(vk_down)){
 if(keyboard_check_pressed(vk_up)){
     variableTest+=changeTest;
 }
-gravRise = variableTest;
+gravRise = variableTest;*/
 
 if(keyboard_check(ord('P'))){
     x=100;
@@ -315,8 +332,8 @@ if(keyboard_check(ord('P'))){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text (50, 50, vx);
-draw_text (50, 65, variableTest);
+            <string>draw_text (50, 50, cLeft);
+draw_text (50, 65, tempGrav);
 
 </string>
           </argument>
