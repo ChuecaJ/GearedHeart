@@ -46,11 +46,14 @@ airFric     = 0.01;
 vxMax       = 8.00;
 vyMax       = 18.0;
 jumpHeight  = 11.5;
-gravRise    = 0.65;
+gravRise    = 0.70;
 gravFall    = 1.40;
 gravSlide   = 0.30;
 
+//Control variables
 clingTime   = 4.00;
+canMove     = true;
+canJump     = true;
 
 //Wall and floor check
 cRight = instance_place(x+1, y, oBlock);
@@ -81,9 +84,9 @@ onGround = OnGround();
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///Sticking
+            <string>///canMove
 
-sticking = false;
+canMove = true;
 </string>
           </argument>
         </arguments>
@@ -226,16 +229,18 @@ if(!onGround){
 }
 
 //Right and Left
-if (kRight &amp;&amp; !kLeft){
-    if(vx &lt; 0){
-        vx = Approach(vx, 0, tempFric);
+if(canMove){
+    if (kRight &amp;&amp; !kLeft){
+        if(vx &lt; 0){
+            vx = Approach(vx, 0, tempFric);
+        }
+        vx = Approach(vx, vxMax, tempAccel);
+    }else if (kLeft &amp;&amp; !kRight){
+        if(vx &gt; 0){
+            vx = Approach(vx, 0, tempFric);
+        }
+        vx = Approach(vx, -vxMax, tempAccel);
     }
-    vx = Approach(vx, vxMax, tempAccel);
-}else if (kLeft &amp;&amp; !kRight){
-    if(vx &gt; 0){
-        vx = Approach(vx, 0, tempFric);
-    }
-    vx = Approach(vx, -vxMax, tempAccel);
 }
 
 //Friction
@@ -244,16 +249,41 @@ if(!kRight &amp;&amp; !kLeft){
 }
 
 //Jump
-if (kJump &amp;&amp; onGround){
+if (kJump &amp;&amp; onGround &amp;&amp; canJump){
     vy = -jumpHeight;
+    canJump = false;
+}
+if(keyboard_check_released(vk_space)){
+    canJump = true;
 }
 
 //Wall jump
-if((cLeft || cRight) &amp;&amp; kJump){
-    
+if(!onGround &amp;&amp; canJump){
+    if(cLeft &amp;&amp; kJump){
+    //vxMax = 14.0;
+        if (kLeft){
+            vy = -jumpHeight;
+            vx = vxMax*0.5;
+        }else{
+            vy = -jumpHeight*0.5;
+            vx = vxMax;
+        }
+    canJump = false;
+    }else if (cRight &amp;&amp; kJump){
+    //vxMax = 14.0;
+        if (kRight){
+            vy = -jumpHeight;
+            vx = -vxMax*0.5;
+        }else{
+            vy = -jumpHeight*0.5;
+            vx = -vxMax;
+        }
+    canJump = false;
+    }
 }
-
-
+/*if ((onGround || cLeft || cRight) &amp;&amp; vx&lt;=8){
+    vxMax = 8.00;
+}
 
 </string>
           </argument>
@@ -290,7 +320,7 @@ if(cLeft != noone &amp;&amp; !place_meeting(x, y-1, oBlock)){
 }*/
 
 sprite_index = sPlayer;
-if(cLeft){
+if(cLeft || cRight){
     sprite_index = sCheck;
 }
     
@@ -332,8 +362,8 @@ if(keyboard_check(ord('P'))){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text (50, 50, cLeft);
-draw_text (50, 65, tempGrav);
+            <string>draw_text (50, 50, vx);
+draw_text (50, 65, vxMax);
 
 </string>
           </argument>
