@@ -49,6 +49,8 @@ jumpHeight  = 11.5;
 gravRise    = 0.70;
 gravFall    = 1.40;
 gravSlide   = 0.30;
+vxMaxWall   = 12.0;
+vyMaxWall   = 12.0;
 
 //Control variables
 clingTime   = 4.00;
@@ -126,6 +128,16 @@ if(place_meeting(x+vx, y, oBlock)){
     }
     vx=0;
 }
+
+//Corner collision
+if(place_meeting(x+vx, y+vy, oBlock)){
+    while(!place_meeting(x+sign(vx), y+sign(vy), oBlock)){
+        y+=sign(vy);
+        x+=sign(vx);
+    }
+    vy=0;
+}
+
 </string>
           </argument>
         </arguments>
@@ -214,11 +226,13 @@ cLeft  = instance_place(x-1, y, oBlock);
 
 if((vy&gt;=0 || !kJump)){
     tempGrav=gravFall;
+    vyMax=18.0;
 }else if (kJump){
     tempGrav=gravRise;
 }
 if ((cLeft || cRight) &amp;&amp; vy&gt;=0){
     tempGrav=gravSlide;
+    vyMax=vyMaxWall;
 }
 
 //Apply gravity
@@ -260,28 +274,30 @@ if(keyboard_check_released(vk_space)){
 //Wall jump
 if(!onGround &amp;&amp; canJump){
     if(cLeft &amp;&amp; kJump){
-    //vxMax = 14.0;
         if (kLeft){
+            vxMax = 8.0;
             vy = -jumpHeight;
-            vx = vxMax*0.5;
+            vx = vxMax*0.7;
         }else{
+            vxMax = vxMaxWall;
             vy = -jumpHeight*0.5;
             vx = vxMax;
         }
     canJump = false;
     }else if (cRight &amp;&amp; kJump){
-    //vxMax = 14.0;
         if (kRight){
+            vxMax = 8.0;
             vy = -jumpHeight;
-            vx = -vxMax*0.5;
+            vx = -vxMax*0.7;
         }else{
+            vxMax = vxMaxWall;
             vy = -jumpHeight*0.5;
             vx = -vxMax;
         }
     canJump = false;
     }
 }
-/*if ((onGround || cLeft || cRight) &amp;&amp; vx&lt;=8){
+if (onGround || keyboard_check_released(vk_space)){
     vxMax = 8.00;
 }
 
@@ -362,8 +378,8 @@ if(keyboard_check(ord('P'))){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text (50, 50, vx);
-draw_text (50, 65, vxMax);
+            <string>draw_text (50, 50, vy);
+draw_text (50, 65, vyMax);
 
 </string>
           </argument>
