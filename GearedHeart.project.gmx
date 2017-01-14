@@ -9,6 +9,8 @@
     <sprite>sprites\sBlock</sprite>
     <sprite>sprites\sPlayer</sprite>
     <sprite>sprites\sCheck</sprite>
+    <sprite>sprites\sEnemy</sprite>
+    <sprite>sprites\sBullet</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -19,6 +21,10 @@
   <objects name="objects">
     <object>objects\oBlock</object>
     <object>objects\oPlayer</object>
+    <objects name="Enemies">
+      <object>objects\oEnemy</object>
+    </objects>
+    <object>objects\oBullet</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

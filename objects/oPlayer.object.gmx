@@ -208,7 +208,7 @@ repeat (abs(vxNew)) {
 //Input
 kRight = keyboard_check(ord('D'));
 kLeft  = keyboard_check(ord('A'));
-kJump  = keyboard_check(vk_space);
+kJump  = keyboard_check(vk_space) || keyboard_check(ord('W'));
 
 //Choose the right acceleration and friction
 onGround = OnGround();
@@ -267,7 +267,7 @@ if (kJump &amp;&amp; onGround &amp;&amp; canJump){
     vy = -jumpHeight;
     canJump = false;
 }
-if(keyboard_check_released(vk_space)){
+if(!kJump &amp;&amp; (onGround || place_meeting(x+vx, y, oBlock) || place_meeting(x, y+vy, oBlock))){
     canJump = true;
 }
 
@@ -321,6 +321,35 @@ if (onGround || keyboard_check_released(vk_space)){
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>///Shoot
+
+//Input
+kShot = keyboard_check_pressed(ord('V'));
+
+//Shot
+if(kShot){
+    instance_create(x+16, y+16, oBullet);
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///Testing, debugging and panic buttons
 
 //Wall check
@@ -335,10 +364,10 @@ if(cLeft != noone &amp;&amp; !place_meeting(x, y-1, oBlock)){
     cRight.sprite_index = sCheck;
 }*/
 
-sprite_index = sPlayer;
+/*sprite_index = sPlayer;
 if(cLeft || cRight){
     sprite_index = sCheck;
-}
+}*/
     
 /*variableTest = gravRise;
 changeTest   = 0.05;
@@ -378,8 +407,8 @@ if(keyboard_check(ord('P'))){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text (50, 50, vy);
-draw_text (50, 65, vyMax);
+            <string>draw_text (50, 50, view_xport[0]);
+//draw_text (50, 65, vyMax);
 
 </string>
           </argument>
