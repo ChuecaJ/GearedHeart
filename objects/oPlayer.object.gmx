@@ -38,19 +38,27 @@ vy = 0;
 cx = 0;
 cy = 0;
 
+//Maximum velocities
+vxMax       = 14.0;
+vyMax       = 18.0;
+vxMaxNormal = 14.0;
+vyMaxNormal = 18.0;
+vxMaxWall   = 22.0;
+vyMaxWall   = 12.0;
+
+
+
 //Some variables
 groundAccel = 1.00;
 groundFric  = 2.00;
 airAccel    = 1.00;
 airFric     = 0.01;
-vxMax       = 8.00;
-vyMax       = 18.0;
-jumpHeight  = 11.5;
-gravRise    = 0.70;
-gravFall    = 1.40;
-gravSlide   = 0.30;
-vxMaxWall   = 12.0;
-vyMaxWall   = 12.0;
+
+gravRise    = 0.70*1.5;
+gravFall    = 1.40*1.7;
+gravSlide   = 0.30*1.5;
+
+jumpHeight  = 17.0;
 
 //Control variables
 clingTime   = 4.00;
@@ -113,6 +121,24 @@ canMove = true;
             <kind>1</kind>
             <string>///Collisions
 
+
+//Slope
+/*repeat(vx){
+    if (place_meeting(x+sign(vx), y, oSlope) &amp;&amp;
+        !place_meeting(x+sign(vx), y-1, oSlope)){
+
+        y--;    
+    }
+} */
+
+//Corner collision
+if(place_meeting(x+vx, y+vy, oBlock)){
+    while(!place_meeting(x+sign(vx), y+sign(vy), oBlock)){
+        y+=sign(vy);
+        x+=sign(vx);
+    }
+}
+
 //Vertical collision
 if(place_meeting(x, y+vy, oBlock)){
     while(!place_meeting(x, y+sign(vy), oBlock)){
@@ -129,14 +155,16 @@ if(place_meeting(x+vx, y, oBlock)){
     vx=0;
 }
 
-//Corner collision
-if(place_meeting(x+vx, y+vy, oBlock)){
-    while(!place_meeting(x+sign(vx), y+sign(vy), oBlock)){
-        y+=sign(vy);
-        x+=sign(vx);
-    }
-    vy=0;
-}
+
+
+
+
+
+
+
+
+
+
 
 </string>
           </argument>
@@ -226,7 +254,7 @@ cLeft  = instance_place(x-1, y, oBlock);
 
 if((vy&gt;=0 || !kJump)){
     tempGrav=gravFall;
-    vyMax=18.0;
+    vyMax=vyMaxNormal;
 }else if (kJump){
     tempGrav=gravRise;
 }
@@ -272,10 +300,10 @@ if(!kJump &amp;&amp; (onGround || place_meeting(x+vx, y, oBlock) || place_meetin
 }
 
 //Wall jump
-if(!onGround &amp;&amp; canJump){
+/*if(!onGround &amp;&amp; canJump){
     if(cLeft &amp;&amp; kJump){
         if (kLeft){
-            vxMax = 8.0;
+            vxMax = vxMaxNormal;
             vy = -jumpHeight;
             vx = vxMax*0.7;
         }else{
@@ -286,7 +314,7 @@ if(!onGround &amp;&amp; canJump){
     canJump = false;
     }else if (cRight &amp;&amp; kJump){
         if (kRight){
-            vxMax = 8.0;
+            vxMax = vxMaxNormal;
             vy = -jumpHeight;
             vx = -vxMax*0.7;
         }else{
@@ -298,8 +326,8 @@ if(!onGround &amp;&amp; canJump){
     }
 }
 if (onGround || keyboard_check_released(vk_space)){
-    vxMax = 8.00;
-}
+    vxMax = vxMaxNormal;
+}*/
 
 </string>
           </argument>
@@ -352,22 +380,7 @@ if(kShot){
             <kind>1</kind>
             <string>///Testing, debugging and panic buttons
 
-//Wall check
-/*
-cRight = instance_place(x+1, y, oBlock);
-cLeft  = instance_place(x-1, y, oBlock);
-
-oBlock.sprite_index = sBlock;
-if(cLeft != noone &amp;&amp; !place_meeting(x, y-1, oBlock)){
-    cLeft.sprite_index = sCheck;
-}else if (cRight != noone &amp;&amp; !place_meeting(x, y-1, oBlock)){
-    cRight.sprite_index = sCheck;
-}*/
-
-/*sprite_index = sPlayer;
-if(cLeft || cRight){
-    sprite_index = sCheck;
-}*/
+draw_sprite(sPlayer, -1, 100, 100);
     
 /*variableTest = gravRise;
 changeTest   = 0.05;

@@ -6,11 +6,17 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\sBlock</sprite>
     <sprite>sprites\sPlayer</sprite>
     <sprite>sprites\sCheck</sprite>
-    <sprite>sprites\sEnemy</sprite>
     <sprite>sprites\sBullet</sprite>
+    <sprites name="Blocks">
+      <sprite>sprites\sBlock</sprite>
+      <sprite>sprites\sSlopeRight</sprite>
+      <sprite>sprites\sSlopeLeft</sprite>
+    </sprites>
+    <sprites name="Enemies">
+      <sprite>sprites\sEnemy</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -19,12 +25,17 @@
     <script>scripts\Approach.gml</script>
   </scripts>
   <objects name="objects">
-    <object>objects\oBlock</object>
     <object>objects\oPlayer</object>
+    <object>objects\oBullet</object>
     <objects name="Enemies">
       <object>objects\oEnemy</object>
     </objects>
-    <object>objects\oBullet</object>
+    <objects name="Blocks">
+      <object>objects\oBlock</object>
+      <object>objects\oSlope</object>
+      <object>objects\oSlopeRight</object>
+      <object>objects\oSlopeLeft</object>
+    </objects>
   </objects>
   <rooms name="rooms">
     <room>rooms\room0</room>

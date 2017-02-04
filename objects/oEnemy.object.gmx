@@ -132,6 +132,8 @@ repeat (abs(vxNew)) {
     x += sign(vx);
 }
 
+//x=oPlayer.x+oPlayer.vx;
+//y=oPlayer.y+oPlayer.vy;
 
 </string>
           </argument>
