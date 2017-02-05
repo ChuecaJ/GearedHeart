@@ -129,13 +129,22 @@ canMove = true;
 
         y--;    
     }
-} */
+}*/
 
 //Corner collision
+var vxNew, vyNew;
+vxNew=vx;
+vyNew=vy;
+
 if(place_meeting(x+vx, y+vy, oBlock)){
     while(!place_meeting(x+sign(vx), y+sign(vy), oBlock)){
-        y+=sign(vy);
-        x+=sign(vx);
+        if(vyNew&gt;vxNew){
+            y+=sign(vy);
+            vyNew--;
+        }else{
+            x+=sign(vx);
+            vxNew--;
+        }
     }
 }
 
