@@ -123,18 +123,19 @@ canMove = true;
 
 
 //Slope
-/*repeat(vx){
-    if (place_meeting(x+sign(vx), y, oSlope) &amp;&amp;
-        !place_meeting(x+sign(vx), y-1, oSlope)){
-
-        y--;    
+    if (place_meeting(x+sign(vx), y, oBlock) &amp;&amp;
+        !place_meeting(x+sign(vx), y-1, oBlock)){
+        
+        repeat(abs(vx)){        //Sigue sin fucnionar bien
+            y--;
+        }  
     }
-}*/
+
 
 //Corner collision
 var vxNew, vyNew;
-vxNew=vx;
-vyNew=vy;
+vxNew=abs(vx);
+vyNew=abs(vy);
 
 if(place_meeting(x+vx, y+vy, oBlock)){
     while(!place_meeting(x+sign(vx), y+sign(vy), oBlock)){

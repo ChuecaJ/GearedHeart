@@ -32,7 +32,6 @@
     </objects>
     <objects name="Blocks">
       <object>objects\oBlock</object>
-      <object>objects\oSlope</object>
       <object>objects\oSlopeRight</object>
       <object>objects\oSlopeLeft</object>
     </objects>
