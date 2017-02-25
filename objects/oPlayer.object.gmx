@@ -310,7 +310,7 @@ if(!kJump &amp;&amp; (onGround || place_meeting(x+vx, y, oBlock) || place_meetin
 }
 
 //Wall jump
-/*if(!onGround &amp;&amp; canJump){
+if(!onGround &amp;&amp; canJump){
     if(cLeft &amp;&amp; kJump){
         if (kLeft){
             vxMax = vxMaxNormal;
@@ -337,7 +337,7 @@ if(!kJump &amp;&amp; (onGround || place_meeting(x+vx, y, oBlock) || place_meetin
 }
 if (onGround || keyboard_check_released(vk_space)){
     vxMax = vxMaxNormal;
-}*/
+}
 
 </string>
           </argument>
