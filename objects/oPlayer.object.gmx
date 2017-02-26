@@ -5,7 +5,7 @@
   <visible>-1</visible>
   <depth>0</depth>
   <persistent>0</persistent>
-  <parentName>&lt;undefined&gt;</parentName>
+  <parentName>oEntityPar</parentName>
   <maskName>&lt;undefined&gt;</maskName>
   <events>
     <event eventtype="0" enumb="0">
@@ -41,11 +41,6 @@ cy = 0;
 //Maximum velocities
 vxMax       = 14.0;
 vyMax       = 18.0;
-vxMaxNormal = 14.0;
-vyMaxNormal = 18.0;
-vxMaxWall   = 22.0;
-vyMaxWall   = 12.0;
-
 
 
 //Some variables
@@ -61,7 +56,6 @@ gravSlide   = 0.30*1.5;
 jumpHeight  = 17.0;
 
 //Control variables
-clingTime   = 4.00;
 canMove     = true;
 canJump     = true;
 
@@ -122,16 +116,6 @@ canMove = true;
             <string>///Collisions
 
 
-//Slope
-    if (place_meeting(x+sign(vx), y, oBlock) &amp;&amp;
-        !place_meeting(x+sign(vx), y-1, oBlock)){
-        
-        repeat(abs(vx)){        //Sigue sin fucnionar bien
-            y--;
-        }  
-    }
-
-
 //Corner collision
 var vxNew, vyNew;
 vxNew=abs(vx);
@@ -165,8 +149,8 @@ if(place_meeting(x+vx, y, oBlock)){
     vx=0;
 }
 
-
-
+//Final, just in case
+move_outside_solid(90, 60);
 
 
 
@@ -264,13 +248,11 @@ cLeft  = instance_place(x-1, y, oBlock);
 
 if((vy&gt;=0 || !kJump)){
     tempGrav=gravFall;
-    vyMax=vyMaxNormal;
 }else if (kJump){
     tempGrav=gravRise;
 }
 if ((cLeft || cRight) &amp;&amp; vy&gt;=0){
     tempGrav=gravSlide;
-    vyMax=vyMaxWall;
 }
 
 //Apply gravity
@@ -309,35 +291,6 @@ if(!kJump &amp;&amp; (onGround || place_meeting(x+vx, y, oBlock) || place_meetin
     canJump = true;
 }
 
-//Wall jump
-if(!onGround &amp;&amp; canJump){
-    if(cLeft &amp;&amp; kJump){
-        if (kLeft){
-            vxMax = vxMaxNormal;
-            vy = -jumpHeight;
-            vx = vxMax*0.7;
-        }else{
-            vxMax = vxMaxWall;
-            vy = -jumpHeight*0.5;
-            vx = vxMax;
-        }
-    canJump = false;
-    }else if (cRight &amp;&amp; kJump){
-        if (kRight){
-            vxMax = vxMaxNormal;
-            vy = -jumpHeight;
-            vx = -vxMax*0.7;
-        }else{
-            vxMax = vxMaxWall;
-            vy = -jumpHeight*0.5;
-            vx = -vxMax;
-        }
-    canJump = false;
-    }
-}
-if (onGround || keyboard_check_released(vk_space)){
-    vxMax = vxMaxNormal;
-}
 
 </string>
           </argument>
@@ -360,7 +313,7 @@ if (onGround || keyboard_check_released(vk_space)){
           <argument>
             <kind>1</kind>
             <string>///Shoot
-
+/*
 //Input
 kShot = keyboard_check_pressed(ord('V'));
 
@@ -430,7 +383,7 @@ if(keyboard_check(ord('P'))){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_text (50, 50, view_xport[0]);
+            <string>//draw_text (50, 50, view_xport[0]);
 //draw_text (50, 65, vyMax);
 
 </string>

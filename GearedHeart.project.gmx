@@ -6,9 +6,8 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\sPlayer</sprite>
     <sprite>sprites\sCheck</sprite>
-    <sprite>sprites\sBullet</sprite>
+    <sprite>sprites\sManager</sprite>
     <sprites name="Blocks">
       <sprite>sprites\sBlock</sprite>
       <sprite>sprites\sSlopeRight</sprite>
@@ -17,26 +16,44 @@
     <sprites name="Enemies">
       <sprite>sprites\sEnemy</sprite>
     </sprites>
+    <sprites name="Player">
+      <sprite>sprites\sPlayer</sprite>
+      <sprite>sprites\sBullet</sprite>
+    </sprites>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\backgroundTest</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\OnGround.gml</script>
     <script>scripts\Approach.gml</script>
   </scripts>
+  <shaders name="shaders">
+    <shader type="GLSLES">shaders\shd_Pause.shader</shader>
+  </shaders>
   <objects name="objects">
-    <object>objects\oPlayer</object>
-    <object>objects\oBullet</object>
+    <objects name="Managers">
+      <object>objects\oManager</object>
+      <object>objects\oPause</object>
+    </objects>
     <objects name="Enemies">
       <object>objects\oEnemy</object>
     </objects>
     <objects name="Blocks">
       <object>objects\oBlock</object>
-      <object>objects\oSlopeRight</object>
-      <object>objects\oSlopeLeft</object>
+    </objects>
+    <objects name="Parents">
+      <object>objects\oEntityPar</object>
+      <object>objects\oEnemyPar</object>
+    </objects>
+    <objects name="Player">
+      <object>objects\oPlayer</object>
+      <object>objects\oBullet</object>
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\room_preload</room>
     <room>rooms\room0</room>
   </rooms>
   <help>
