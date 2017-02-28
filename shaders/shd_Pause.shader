@@ -24,19 +24,32 @@ void main()
 varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
+uniform float speedChange;
+uniform float stepsChange;
+
 void main()
 {
     //Get the original color of the pixel
     vec4 originalColor = texture2D( gm_BaseTexture, v_vTexcoord );
+
+    float outputAlpha = originalColor.a;
     
-    float red   = originalColor.r;
-    float green = originalColor.g;
-    float blue  = originalColor.b;
-    float alpha = originalColor.a;
-    float average = (red+green+blue)/3.0;
+    float average = (originalColor.r+originalColor.g+originalColor.b)/3.0;
+    
+    float outputRed   = originalColor.r;
+    float outputGreen = originalColor.g;
+    float outputBlue  = originalColor.b;
+    
+    float changeRed   = ((average-outputRed)/stepsChange)*speedChange;
+    float changeGreen = ((average-outputGreen)/stepsChange)*speedChange;
+    float changeBlue  = ((average-outputBlue)/stepsChange)*speedChange;
+    
+    outputRed   += changeRed;
+    outputGreen += changeGreen;
+    outputBlue  += changeBlue;
     
     //Create the color
-    vec4 outputColor = vec4(average, average, average, alpha);
+    vec4 outputColor = vec4(outputRed, outputGreen, outputBlue, outputAlpha);
     //Output the new color
     gl_FragColor = outputColor;
 }
