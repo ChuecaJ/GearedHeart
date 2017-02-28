@@ -24,22 +24,30 @@ void main()
 varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
-uniform float speedChange;
-uniform float stepsChange;
+uniform vec2  size;//The actual size in pixels
+uniform float pixelSize;
+
+uniform float speedChange;//Step by step untill the total time
+uniform float stepsChange;//Total time to become B&W
 
 void main()
 {
+    //Pixelate
+    vec2 realTexPos  = v_vTexcoord*size; //5
+    vec2 floorTexPos = floor(realTexPos/pixelSize)*pixelSize; //1.0*5.0=5.0
+    vec2 texPos = floorTexPos/size; //Final position rounded down
+    
     //Get the original color of the pixel
-    vec4 originalColor = texture2D( gm_BaseTexture, v_vTexcoord );
-
+    vec4 originalColor = texture2D(gm_BaseTexture, texPos);
+    //Original alpha, because if it isn't an object is all black
     float outputAlpha = originalColor.a;
-    
+    //This is the B&W color
     float average = (originalColor.r+originalColor.g+originalColor.b)/3.0;
-    
+    //The original colors until average
     float outputRed   = originalColor.r;
     float outputGreen = originalColor.g;
     float outputBlue  = originalColor.b;
-    
+    //The change in every step until average
     float changeRed   = ((average-outputRed)/stepsChange)*speedChange;
     float changeGreen = ((average-outputGreen)/stepsChange)*speedChange;
     float changeBlue  = ((average-outputBlue)/stepsChange)*speedChange;
@@ -50,7 +58,10 @@ void main()
     
     //Create the color
     vec4 outputColor = vec4(outputRed, outputGreen, outputBlue, outputAlpha);
-    //Output the new color
+    
+    
+    //Output the new color with the pixelate
     gl_FragColor = outputColor;
+    //gl_FragColor = v_vColour * texture2D( gm_BaseTexture, texPos );
 }
 

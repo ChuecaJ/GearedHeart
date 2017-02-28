@@ -45,6 +45,7 @@ surface_reset_target();
 instance_deactivate_all(true);
 visible = true;
 
+pixelSize   = 0.0;
 speedChange = 0.0;
 stepsChange = 15.0;
 
@@ -74,6 +75,7 @@ stepsChange = 15.0;
 
 if(speedChange&lt;stepsChange){
     speedChange++;
+    pixelSize+=0.2;
 }else if(speedChange&gt;=stepsChange){
     speedChange=stepsChange;
 }
@@ -109,6 +111,12 @@ var spdCh = shader_get_uniform(shd_Pause, "speedChange");
 shader_set_uniform_f(spdCh, speedChange);
 var stpCh = shader_get_uniform(shd_Pause, "stepsChange");
 shader_set_uniform_f(stpCh, stepsChange);
+
+var s = shader_get_uniform(shd_Pause, "size");
+shader_set_uniform_f(s, surface_get_width(pauseSurf), surface_get_height(pauseSurf));
+var ps = shader_get_uniform(shd_Pause, "pixelSize");
+shader_set_uniform_f(ps, pixelSize);
+
 
 if(surface_exists(pauseSurf)){
     draw_surface(pauseSurf, view_xview[0], view_yview[0]);
