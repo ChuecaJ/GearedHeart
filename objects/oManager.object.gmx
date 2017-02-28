@@ -85,7 +85,7 @@ if(global.pause &amp;&amp; !instance_exists(oPause)){
             <kind>1</kind>
             <string>///Pause
 
-draw_text(50,50,global.pause);
+draw_text(50,50,fps_real);
 
 
 </string>

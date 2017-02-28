@@ -45,7 +45,7 @@ surface_reset_target();
 instance_deactivate_all(true);
 visible = true;
 
-pixelSize   = 0.0;
+pixelSize   = 1.0;
 speedChange = 0.0;
 stepsChange = 15.0;
 
