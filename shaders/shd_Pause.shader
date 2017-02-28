@@ -37,7 +37,7 @@ void main()
     vec2 floorTexPos = floor(realTexPos/pixelSize)*pixelSize; //1.0*5.0=5.0
     vec2 texPos = floorTexPos/size; //Final position rounded down
     
-    //Get the original color of the pixel
+    //Get the original color of the pixel (already pixelated)
     vec4 originalColor = texture2D(gm_BaseTexture, texPos);
     //Original alpha, because if it isn't an object is all black
     float outputAlpha = originalColor.a;

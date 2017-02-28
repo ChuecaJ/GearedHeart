@@ -3,7 +3,7 @@
   <spriteName>&lt;undefined&gt;</spriteName>
   <solid>0</solid>
   <visible>0</visible>
-  <depth>-4999</depth>
+  <depth>0</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -49,7 +49,7 @@ pixelSize   = 1.0;
 speedChange = 0.0;
 stepsChange = 15.0;
 
-
+spawnMenu = true;
 
 </string>
           </argument>
@@ -78,11 +78,46 @@ stepsChange = 15.0;
 if(speedChange&lt;stepsChange){
     speedChange++;
     pixelSize+=0.2;
-}else if(speedChange&gt;=stepsChange){
+}else{
     speedChange=stepsChange;
-    
-    instance_create(100, 100, oBullet);
+    if(spawnMenu){
+        //Here we create the menu
+        spawnMenu=false;
+    }
 }
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Unpause
+
+/*if(quitMenu){    
+    if(!spawnMenu){
+        //Here we destroy the menu
+        spawnMenu=true
+    }
+    surface_free(pauseSurf);
+    instance_activate_all();
+    instance_destroy();
+}*/
 
 
 </string>
@@ -109,7 +144,7 @@ if(speedChange&lt;stepsChange){
             <kind>1</kind>
             <string>///Draw the surface with the shader
 
-instance_create(0,0,oEnableShader_5001);//Set the shader at depth 5001 for the tile set
+instance_create(0,0,oEnableShader_m4998);//Set the shader at depth -4998 for the tile set
 shader_set(shd_Pause);
 
 var spdCh = shader_get_uniform(shd_Pause, "speedChange");
@@ -127,7 +162,7 @@ if(surface_exists(pauseSurf)){
     draw_surface(pauseSurf, view_xview[0], view_yview[0]);
 }
 shader_reset();
-instance_create(0,0,oDisableShader_4999);//Reset the shader at depth 4999 for the tile set
+instance_create(0,0,oDisableShader_m5002);//Reset the shader at depth -5002 for the tile set
 
 </string>
           </argument>
@@ -153,8 +188,10 @@ instance_create(0,0,oDisableShader_4999);//Reset the shader at depth 4999 for th
             <kind>1</kind>
             <string>///Unpause
 
-//shader_reset();
-
+if(!spawnMenu){
+    //Here we destroy the menu
+    spawnMenu=true
+}
 surface_free(pauseSurf);
 instance_activate_all();
 instance_destroy();

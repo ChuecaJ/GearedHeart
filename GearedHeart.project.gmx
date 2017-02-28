@@ -36,8 +36,8 @@
     <objects name="Managers">
       <object>objects\oManager</object>
       <object>objects\oPause</object>
-      <object>objects\oEnableShader_5001</object>
-      <object>objects\oDisableShader_4999</object>
+      <object>objects\oEnableShader_m4998</object>
+      <object>objects\oDisableShader_m5002</object>
     </objects>
     <objects name="Enemies">
       <object>objects\oEnemy</object>
