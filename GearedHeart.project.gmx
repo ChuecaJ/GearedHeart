@@ -20,6 +20,15 @@
       <sprite>sprites\sPlayer</sprite>
       <sprite>sprites\sBullet</sprite>
     </sprites>
+    <sprites name="PauseMenu">
+      <sprite>sprites\sOpt</sprite>
+      <sprite>sprites\sOptResume0</sprite>
+      <sprite>sprites\sOptResume0P</sprite>
+      <sprite>sprites\sOptOptions1</sprite>
+      <sprite>sprites\sOptOptions1P</sprite>
+      <sprite>sprites\sOptQuit2</sprite>
+      <sprite>sprites\sOptQuit2P</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\backgroundTest</background>
@@ -35,9 +44,12 @@
   <objects name="objects">
     <objects name="Managers">
       <object>objects\oManager</object>
-      <object>objects\oPause</object>
-      <object>objects\oEnableShader_m4998</object>
-      <object>objects\oDisableShader_m5002</object>
+      <objects name="Pause">
+        <object>objects\oPause</object>
+        <object>objects\oEnableShader_5002</object>
+        <object>objects\oDisableShader_4998</object>
+        <object>objects\oPauseMenu</object>
+      </objects>
     </objects>
     <objects name="Enemies">
       <object>objects\oEnemy</object>
