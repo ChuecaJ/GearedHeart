@@ -12,13 +12,15 @@
       <sprite>sprites\sBlock</sprite>
       <sprite>sprites\sSlopeRight</sprite>
       <sprite>sprites\sSlopeLeft</sprite>
+      <sprite>sprites\sBox</sprite>
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\sEnemy</sprite>
     </sprites>
     <sprites name="Player">
-      <sprite>sprites\sPlayer</sprite>
+      <sprite>sprites\sMainChar</sprite>
       <sprite>sprites\sBullet</sprite>
+      <sprite>sprites\sAnakle</sprite>
     </sprites>
     <sprites name="PauseMenu">
       <sprite>sprites\sOpt</sprite>
@@ -56,14 +58,20 @@
     </objects>
     <objects name="Blocks">
       <object>objects\oBlock</object>
+      <object>objects\oBox</object>
     </objects>
     <objects name="Parents">
       <object>objects\oEntityPar</object>
       <object>objects\oEnemyPar</object>
+      <object>objects\oPlayerPar</object>
     </objects>
     <objects name="Player">
-      <object>objects\oPlayer</object>
       <object>objects\oBullet</object>
+      <object>objects\oAnakle</object>
+      <objects name="Characters">
+        <object>objects\oMainChar</object>
+        <object>objects\oJumper</object>
+      </objects>
     </objects>
   </objects>
   <rooms name="rooms">
