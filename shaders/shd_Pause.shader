@@ -63,5 +63,17 @@ void main()
     //Output the new color with the pixelate
     gl_FragColor = outputColor;
     //gl_FragColor = v_vColour * texture2D( gm_BaseTexture, texPos );
+    
+    /*vec4 originalColor = texture2D(gm_BaseTexture, v_vTexcoord);
+    
+    float outputRed   = 1.0-originalColor.r;
+    float outputGreen = 1.0-originalColor.g;
+    float outputBlue  = 1.0-originalColor.b;
+    float outputAlpha = originalColor.a;
+    
+    vec4 outputColor = vec4(outputRed, outputGreen, outputBlue, outputAlpha);
+    
+    gl_FragColor = outputColor;*/
+    
 }
 

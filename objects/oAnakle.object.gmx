@@ -117,7 +117,8 @@ repeat (abs(vxNew)) {
             <string>///Movement
 
 //Input
-kMove  = keyboard_check_pressed(ord('E'));
+kMove  = keyboard_check_pressed(ord('Q'));
+kTrigg = keyboard_check_pressed(ord('E'));
 kRight = keyboard_check(ord('D')) || keyboard_check(vk_right);
 kLeft  = keyboard_check(ord('A')) || keyboard_check(vk_left);
 kUp    = keyboard_check(ord('W')) || keyboard_check(vk_up);

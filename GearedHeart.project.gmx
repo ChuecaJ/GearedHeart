@@ -18,9 +18,14 @@
       <sprite>sprites\sEnemy</sprite>
     </sprites>
     <sprites name="Player">
-      <sprite>sprites\sMainChar</sprite>
       <sprite>sprites\sBullet</sprite>
       <sprite>sprites\sAnakle</sprite>
+      <sprites name="Characters">
+        <sprite>sprites\sMainChar</sprite>
+        <sprite>sprites\sSmall</sprite>
+        <sprite>sprites\sStrong</sprite>
+        <sprite>sprites\sJumper</sprite>
+      </sprites>
     </sprites>
     <sprites name="PauseMenu">
       <sprite>sprites\sOpt</sprite>
@@ -71,6 +76,8 @@
       <objects name="Characters">
         <object>objects\oMainChar</object>
         <object>objects\oJumper</object>
+        <object>objects\oStrong</object>
+        <object>objects\oSmall</object>
       </objects>
     </objects>
   </objects>

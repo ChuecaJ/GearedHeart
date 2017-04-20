@@ -39,8 +39,8 @@ cx = 0;
 cy = 0;
 
 //Maximum velocities
-vxMax       = 14.0;
-vyMax       = 18.0;
+vxMax       = 10.0;
+vyMax       = 25.0;
 
 
 //Some variables
@@ -58,6 +58,7 @@ jumpHeight  = 17.0;
 //Control variables
 canMove     = false;
 canJump     = true;
+canPush     = true;//It has to be false
 
 //Wall and floor check
 cRight = instance_place(x+1, y, oBlock);
@@ -291,7 +292,7 @@ if(canMove){
     }
 }
 //Friction
-if(!kRight &amp;&amp; !kLeft){
+if((!kRight &amp;&amp; !kLeft) || !canMove){
     vx = Approach(vx, 0, tempFric);
 }
 
@@ -316,7 +317,14 @@ if(!kRight &amp;&amp; !kLeft){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string></string>
+            <string>///Move boxes
+
+if(canPush){
+    
+}
+
+
+</string>
           </argument>
         </arguments>
       </action>
