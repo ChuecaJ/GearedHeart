@@ -7,7 +7,166 @@
   <persistent>0</persistent>
   <parentName>oBlock</parentName>
   <maskName>&lt;undefined&gt;</maskName>
-  <events/>
+  <events>
+    <event eventtype="0" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+vx=0;
+vy=0;
+cx=0;
+cy=0;
+
+vyMax = 25.0;
+
+xDifference = 0;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Collisions
+
+
+//Vertical collision
+if(place_meeting(x, y+vy, oBlock)){
+    yDifference = y - instance_place(x, y+vy, oBlock).y;
+    while(!place_meeting(x, y+sign(vy), oBlock)){
+        y-=sign(yDifference);
+    }
+    vy=0;
+}
+
+//Horizontal collision
+if(place_meeting(x+vx, y, oBlock)){
+    xDifference = x - instance_place(x+vx, y, oBlock).x;
+    while(!place_meeting(x+sign(vx), y, oBlock)){
+        x-=sign(xDifference);
+    }
+    vx=0;
+}
+
+//Final, just in case
+if(xDifference&lt;=0){
+    move_outside_solid(180, 60);
+}else{
+    move_outside_solid(0, 60);    
+}
+
+//Collide with characters
+if(place_meeting(x, y, oPlayerPar)){
+    xDifference = x - instance_place(x, y, oPlayerPar).x;
+    while(place_meeting(x, y, oPlayerPar)){
+        x+=sign(xDifference);
+    }
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Apply Movement
+
+//Sub-pixel movement
+var vxNew, vyNew;
+
+cx += vx;
+cy += vy;
+vxNew = round(cx);
+vyNew = round(cy);
+cx -= vxNew;
+cy -= vyNew;
+
+y+=vyNew;
+x+=vxNew;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///Movement
+
+//Fall
+onGround=OnGround();
+
+if(!onGround){
+    vy = Approach(vy, vyMax, 2.38);
+}else{
+    vy = 0;
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+  </events>
   <PhysicsObject>0</PhysicsObject>
   <PhysicsObjectSensor>0</PhysicsObjectSensor>
   <PhysicsObjectShape>0</PhysicsObjectShape>

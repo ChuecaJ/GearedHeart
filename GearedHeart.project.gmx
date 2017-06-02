@@ -8,11 +8,11 @@
   <sprites name="sprites">
     <sprite>sprites\sCheck</sprite>
     <sprite>sprites\sManager</sprite>
+    <sprite>sprites\sEndLevel</sprite>
     <sprites name="Blocks">
       <sprite>sprites\sBlock</sprite>
-      <sprite>sprites\sSlopeRight</sprite>
-      <sprite>sprites\sSlopeLeft</sprite>
       <sprite>sprites\sBox</sprite>
+      <sprite>sprites\sSpike</sprite>
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\sEnemy</sprite>
@@ -36,6 +36,14 @@
       <sprite>sprites\sOptQuit2</sprite>
       <sprite>sprites\sOptQuit2P</sprite>
     </sprites>
+    <sprites name="ButtonsNStuff">
+      <sprite>sprites\sButton</sprite>
+      <sprite>sprites\sDoor</sprite>
+      <sprite>sprites\sPlatformH3</sprite>
+      <sprite>sprites\sStop</sprite>
+      <sprite>sprites\sprite24</sprite>
+    </sprites>
+    <sprite>sprites\sFade</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\backgroundTest</background>
@@ -57,6 +65,9 @@
         <object>objects\oDisableShader_4998</object>
         <object>objects\oPauseMenu</object>
       </objects>
+      <object>objects\oEndLevel</object>
+      <object>objects\oFadeInBlack</object>
+      <object>objects\oFadeOutBlack</object>
     </objects>
     <objects name="Enemies">
       <object>objects\oEnemy</object>
@@ -64,11 +75,14 @@
     <objects name="Blocks">
       <object>objects\oBlock</object>
       <object>objects\oBox</object>
+      <object>objects\oSpike</object>
     </objects>
     <objects name="Parents">
       <object>objects\oEntityPar</object>
       <object>objects\oEnemyPar</object>
       <object>objects\oPlayerPar</object>
+      <object>objects\oButtonPar</object>
+      <object>objects\oHazardPar</object>
     </objects>
     <objects name="Player">
       <object>objects\oBullet</object>
@@ -79,6 +93,18 @@
         <object>objects\oStrong</object>
         <object>objects\oSmall</object>
       </objects>
+    </objects>
+    <objects name="ButtonsNStuff">
+      <object>objects\oButton1</object>
+      <object>objects\oDoor1</object>
+      <object>objects\oPlatformV1</object>
+      <object>objects\oButton2</object>
+      <object>objects\oDoor2</object>
+      <object>objects\oPlatform2</object>
+      <object>objects\oButton3</object>
+      <object>objects\oButton4</object>
+      <object>objects\oStop</object>
+      <object>objects\oChangeDirection</object>
     </objects>
   </objects>
   <rooms name="rooms">

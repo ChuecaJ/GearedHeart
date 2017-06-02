@@ -3,7 +3,7 @@
   <spriteName>sAnakle</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-10</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -46,6 +46,10 @@ vMaxDiag = vMax*sqrt(2)/2;
 canMove=false;
 visible=false;
 objectTarget = instance_nearest(x, y, oPlayerPar);
+distToTargetX = 0;
+distToTargetY = 0;
+distToTarget  = 0
+limitRadius = 200;
 
 </string>
           </argument>
@@ -91,6 +95,20 @@ repeat (abs(vxNew)) {
     x += sign(vx);
 }
 
+if (objectTarget != noone)
+{
+    distToTargetX = objectTarget.x - x;
+    distToTargetY = objectTarget.y - y;
+    distToTarget = sqrt(distToTargetX * distToTargetX + distToTargetY * distToTargetY);
+    if (distToTarget &gt; limitRadius)
+    {
+        distToTargetX *= limitRadius / distToTarget;
+        distToTargetY *= limitRadius / distToTarget;
+        x = objectTarget.x - distToTargetX;
+        y = objectTarget.y - distToTargetY;
+    }
+}
+
 
 </string>
           </argument>
@@ -117,8 +135,7 @@ repeat (abs(vxNew)) {
             <string>///Movement
 
 //Input
-kMove  = keyboard_check_pressed(ord('Q'));
-kTrigg = keyboard_check_pressed(ord('E'));
+kMove  = keyboard_check_pressed(ord('Q'))||keyboard_check_pressed(ord('E'));
 kRight = keyboard_check(ord('D')) || keyboard_check(vk_right);
 kLeft  = keyboard_check(ord('A')) || keyboard_check(vk_left);
 kUp    = keyboard_check(ord('W')) || keyboard_check(vk_up);
@@ -132,10 +149,12 @@ if(kMove &amp;&amp; !canMove){
 }else if(kMove &amp;&amp; canMove){
     visible=false;
     canMove=false;
+    objectTarget.depth=0;
     if(place_meeting(x, y, oPlayerPar)){
         objectTarget=instance_nearest(x, y, oPlayerPar);
     }
     objectTarget.canMove=true;
+    objectTarget.depth=-1;
 }
     
     
@@ -173,6 +192,56 @@ if(canMove){
     x=objectTarget.x;
     y=objectTarget.y;
 }
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_text (50, 50, vx);
+draw_text (50, 65, vy);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>
+draw_self();
 
 
 </string>
