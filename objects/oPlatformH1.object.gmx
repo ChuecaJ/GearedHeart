@@ -26,9 +26,9 @@
           <argument>
             <kind>1</kind>
             <string>
-vy=-2;
-initialY=y;
-vspeed=vy;
+vx=-2;
+initialX=x;
+hspeed=vx;
 button=oButton1;
 
 
@@ -58,26 +58,26 @@ button=oButton1;
 
 
 if(button.TRIGGER){
-    vspeed=vy;
+    hspeed=vx;
 }else{
-    vspeed=0;
-    if(y!=initialY){
-        move_towards_point(x, initialY, vy);
+    hspeed=0;
+    if(x!=initialX){
+        move_towards_point(initialX, y, -vx);
     }
 }
 
 if(place_meeting(x, y, oStop)){
     while(place_meeting(x, y, oStop)){
-        y-=sign(vspeed);
+        x-=sign(hspeed);
     }
-    vspeed=0;
+    hspeed=0;
 }
 
-if(place_meeting(x, y+vy, oChangeDirection)){
-    while(!place_meeting(x, y+(sign(vy)), oChangeDirection)){
-        y+=sign(vy);
+if(place_meeting(x+vx, y, oChangeDirection)){
+    while(!place_meeting(x+(sign(vx)), y, oChangeDirection)){
+        x+=sign(vx);
     }
-    vy*=-1;
+    vx*=-1;
 }
 
 </string>

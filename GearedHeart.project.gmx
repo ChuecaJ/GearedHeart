@@ -98,9 +98,8 @@
       <object>objects\oButton1</object>
       <object>objects\oDoor1</object>
       <object>objects\oPlatformV1</object>
+      <object>objects\oPlatformH1</object>
       <object>objects\oButton2</object>
-      <object>objects\oDoor2</object>
-      <object>objects\oPlatform2</object>
       <object>objects\oButton3</object>
       <object>objects\oButton4</object>
       <object>objects\oStop</object>
@@ -109,7 +108,7 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\room_preload</room>
-    <room>rooms\room0</room>
+    <room>rooms\room3</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
