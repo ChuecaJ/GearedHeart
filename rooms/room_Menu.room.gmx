@@ -114,10 +114,10 @@
     <instance objName="oManager" x="256" y="64" name="inst_1AF17D9F" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oChangeDirection" x="288" y="128" name="inst_8D6F44B9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oChangeDirection" x="288" y="416" name="inst_2B9089EE" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oButton1" x="544" y="384" name="inst_74D80A29" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oButton1" x="640" y="384" name="inst_74D80A29" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oBox" x="480" y="352" name="inst_3960368A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="oPlatformV1" x="256" y="384" name="inst_65ADDFD1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="oEndLevel" x="608" y="384" name="inst_7E5B123C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="oEndLevel" x="288" y="384" name="inst_93B84ECD" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

@@ -57,6 +57,7 @@ button=oButton1;
             <string>///Movement
 
 
+
 if(button.TRIGGER){
     vspeed=vy;
 }else{
@@ -66,18 +67,24 @@ if(button.TRIGGER){
     }
 }
 
-if(place_meeting(x, y, oStop)){
-    while(place_meeting(x, y, oStop)){
-        y-=sign(vspeed);
-    }
-    vspeed=0;
-}
-
+//Change direction
 if(place_meeting(x, y+vy, oChangeDirection)){
     while(!place_meeting(x, y+(sign(vy)), oChangeDirection)){
         y+=sign(vy);
     }
     vy*=-1;
+}
+
+//Move the player
+if(place_meeting(x, y-1, oPlayerPar)){
+    if(vspeed&lt;0){
+        player=instance_place(x, y-1, oPlayerPar);
+        player.y=y+vy;
+        
+    }else if(vspeed&gt;0){
+        player=instance_place(x, y-1, oPlayerPar);
+        player.vy+=vy;
+    }
 }
 
 </string>

@@ -28,6 +28,7 @@
             <string>
 restart=false;
 image_alpha=0;
+oPlayerPar.canMove=false;
 
 </string>
           </argument>
@@ -86,7 +87,7 @@ image_alpha+=0.05;
 
 if(image_alpha&gt;=1){
     if(alarm[0]==-1){
-        alarm[0]=60;
+        alarm[0]=40;
     }
     if(restart){
         room_restart();
