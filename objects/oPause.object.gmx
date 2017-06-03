@@ -27,6 +27,7 @@
             <kind>1</kind>
             <string>///Surface &amp; shader values
 
+
 pauseSurf = surface_create(view_wview[0], view_hview[0]);   //Initialize the surface
 
 surface_set_target(pauseSurf);  //Create the surface

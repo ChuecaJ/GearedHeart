@@ -46,6 +46,8 @@ vMaxDiag = vMax*sqrt(2)/2;
 canMove=false;
 visible=false;
 objectTarget = instance_nearest(x, y, oPlayerPar);
+heightTarget = sprite_get_height(objectTarget.sprite_index);
+
 distToTargetX = 0;
 distToTargetY = 0;
 distToTarget  = 0
@@ -146,6 +148,9 @@ if(kMove &amp;&amp; !canMove){
     visible=true;
     canMove=true;
     objectTarget.canMove=false;
+    if(!audio_is_playing(sndAnakleOut)&amp;&amp;global.sounds){
+        audio_play_sound(sndAnakleOut, 1, false);
+    }
 }else if(kMove &amp;&amp; canMove){
     visible=false;
     canMove=false;
@@ -155,6 +160,9 @@ if(kMove &amp;&amp; !canMove){
     }
     objectTarget.canMove=true;
     objectTarget.depth=-1;
+    if(!audio_is_playing(sndAnakleIn)&amp;&amp;global.sounds){
+        audio_play_sound(sndAnakleIn, 1, false);
+    }
 }
     
     
@@ -189,35 +197,12 @@ if(canMove){
         vy=Approach(vy, 0, accel);
     }
 }else{
+    heightTarget = sprite_get_height(objectTarget.sprite_index)/2;
     x=objectTarget.x;
-    y=objectTarget.y;
+    y=objectTarget.y-heightTarget;
 }
 
 
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="8" enumb="64">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>draw_text (50, 50, vx);
-draw_text (50, 65, vy);
 </string>
           </argument>
         </arguments>

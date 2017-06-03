@@ -31,6 +31,8 @@ jumpHeight = 11.5;
 
 vxMax = 6.25;
 
+canPush=true;
+canDie=false;
 </string>
           </argument>
         </arguments>

@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>///Change level
+
 xDifference=abs(oMainChar.x-x);
 yDifference=abs(oMainChar.y-y);
 
@@ -34,7 +35,13 @@ if(xDifference&lt;5&amp;&amp;yDifference&lt;5){
     oMainChar.vy=0;
     oMainChar.x=x;
     oMainChar.y=y;
-    instance_create(x, y, oNextLevel);
+    if(!instance_exists(oNextLevel)){
+        instance_create(x, y, oNextLevel);
+    }
+    //Sound
+    if(!audio_is_playing(sndLevelCompleted)&amp;&amp;global.sounds){
+        audio_play_sound(sndLevelCompleted, 10, false);
+    }
 }
 
 </string>

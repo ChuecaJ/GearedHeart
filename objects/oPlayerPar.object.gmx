@@ -59,7 +59,8 @@ jumpHeight  = 17.0;
 //Control variables
 canMove     = false;
 canJump     = true;
-canPush     = true;//It has to be false
+canPush     = false;//It has to be false
+canDie      = true;
 
 //Wall and floor check
 cRight = place_meeting(x+1, y, oBlock);
@@ -253,13 +254,17 @@ if(place_meeting(x, y+1, oPlatformH1)){
 }*/
 
 //Spikes
-if(place_meeting(x, y, oHazardPar)){
-    DEAD=true
+if(canDie){
+    if(place_meeting(x, y, oHazardPar)){
+        DEAD=true
+    }
 }
 
 if(DEAD){
     canMove=false;
-    instance_create(x, y, oFadeInBlack);
+    if(!instance_exists(oFadeInBlack)){
+        instance_create(x, y, oFadeInBlack);
+    }
 }
 
 </string>
@@ -340,6 +345,9 @@ if(canMove){
     if (kJump &amp;&amp; onGround &amp;&amp; canJump){
         vy = -jumpHeight;
         canJump = false;
+        if(!audio_is_playing(sndJump)&amp;&amp;global.sounds){
+            audio_play_sound(sndJump, 1, false);
+        }
     }
     if(!kJump &amp;&amp; (onGround || place_meeting(x+vx, y, oBlock) || place_meeting(x, y+vy, oBlock))){
         canJump = true;
@@ -393,17 +401,25 @@ if(canPush &amp;&amp; canMove){
         if(pushingRight){
             boxRight = instance_place(x+1, y, oBox);
             boxRight.x = x+offsetBox+vx;
+            if(!audio_is_playing(sndDrag)&amp;&amp;global.music){
+                audio_play_sound(sndDrag, 1, true);
+            }
         }
     }else if(vx&lt;0){
         pushingLeft = place_meeting(x-1, y, oBox);
         if(pushingLeft){
             boxLeft = instance_place(x-1, y, oBox);
             boxLeft.x = x-offsetBox+vx;
+            if(!audio_is_playing(sndDrag)&amp;&amp;global.music){
+                audio_play_sound(sndDrag, 1, true);
+            }
         }
     }
     
     if(pushingRight||pushingLeft) {
         vxMax=3.0;
+    }else{
+        audio_stop_sound(sndDrag);
     }
 }
 

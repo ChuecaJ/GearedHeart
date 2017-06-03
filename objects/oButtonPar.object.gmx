@@ -25,7 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>TRIGGER=false;
+            <string>///Variables
+
+/*I think it is still a big ÑAPA to make tons of buttons and doors with
+  different names, but i still can't figure out the neat way to do it*/
+TRIGGER=false;
+canSound=true;
+
 </string>
           </argument>
         </arguments>
@@ -56,9 +62,14 @@ if(place_meeting(x, y-1, oPlayerPar)||place_meeting(x, y-1, oBox)){
 }
 
 if(image_yscale==0.2){
+    if(!audio_is_playing(sndButton)&amp;&amp;canSound&amp;&amp;global.sounds){
+        audio_play_sound(sndButton, 1, false);
+    }
     TRIGGER=true;
+    canSound=false;
 }else{
     TRIGGER=false;
+    canSound=true;
 }
 
 </string>

@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>///Variables
+
 selection=1;
 kEsc=false;
 kSelect=false;
@@ -53,7 +54,7 @@ kSelect=false;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>///Change the option
 
 kEsc   =keyboard_check(vk_escape);
 kSelect=keyboard_check_pressed(vk_enter)||keyboard_check_pressed(vk_space);
@@ -108,6 +109,15 @@ if(instance_exists(oJustFade)){
     }
 }
 
+
+//Handle music while paused
+if(!audio_is_playing(musicChill)&amp;&amp;global.music){
+    audio_play_sound(musicChill, 1, true);
+}
+if(audio_is_playing(musicChill)&amp;&amp;!global.music){
+    audio_stop_sound(musicChill);
+}
+
 </string>
           </argument>
         </arguments>
@@ -130,7 +140,10 @@ if(instance_exists(oJustFade)){
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>
+            <string>///Draw the options
+
+draw_sprite(sFade, 0, view_wview[0]/2, view_hview[0]/2);
+
 draw_set_font(font20);
 draw_set_colour(c_white);
 draw_set_halign(fa_left);
@@ -142,9 +155,9 @@ if(selection==1){
 }
 
 if(global.music){
-    draw_text(480, 270, "MUSIC: ON");
+    draw_text(100+view_wview[0]/2, view_hview[0]/2, "MUSIC: ON");
 }else{
-    draw_text(480, 270, "MUSIC: OFF");
+    draw_text(100+view_wview[0]/2, view_hview[0]/2, "MUSIC: OFF");
 }
 
 draw_set_colour(c_white);
@@ -155,9 +168,9 @@ if(selection==2){
     draw_set_font(font20B);
 }
 if(global.sounds){
-    draw_text(x+480, 310, "SOUNDS: ON");
+    draw_text(100+view_wview[0]/2, 40+view_hview[0]/2, "SOUNDS: ON");
 }else{
-    draw_text(x+480, 310, "SOUNDS: OFF");
+    draw_text(100+view_wview[0]/2, 40+view_hview[0]/2, "SOUNDS: OFF");
 }
 
 draw_set_colour(c_white);
@@ -168,9 +181,9 @@ if(selection==3){
     draw_set_font(font20B);
 }
 if(global.fullscreen){
-    draw_text(x+480, y+350, "FULLSCREEN: ON");
+    draw_text(100+view_wview[0]/2, 80+view_hview[0]/2, "FULLSCREEN: ON");
 }else{
-    draw_text(x+480, y+350, "FULLSCREEN: OFF");
+    draw_text(100+view_wview[0]/2, 80+view_hview[0]/2, "FULLSCREEN: OFF");
 }
 
 draw_set_colour(c_white);
@@ -180,7 +193,7 @@ if(selection==4){
     draw_set_colour(c_yellow);
     draw_set_font(font20B);
 }
-draw_text(x+480, y+390, "BACK");
+draw_text(100+view_wview[0]/2, 120+view_hview[0]/2, "BACK");
 
 </string>
           </argument>

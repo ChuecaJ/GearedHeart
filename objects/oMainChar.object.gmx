@@ -29,8 +29,10 @@
 
 canMove=true;
 
-instance_create(x, y, oAnakle);
-
+if(!instance_exists(oAnakle)){
+    instance_create(x, y, oAnakle);
+}
+canPush=true;
 
 </string>
           </argument>
