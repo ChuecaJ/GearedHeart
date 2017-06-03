@@ -149,7 +149,10 @@ if(currOption==2){
             <kind>1</kind>
             <string>///global.pause=false;
 
-global.pause=false;
+if(!instance_exists(oOptions)){
+    global.pause=false;
+}
+
 </string>
           </argument>
         </arguments>

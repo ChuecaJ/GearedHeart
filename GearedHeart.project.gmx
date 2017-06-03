@@ -20,6 +20,9 @@
       <sprite>sprites\sManager</sprite>
       <sprite>sprites\sEndLevel</sprite>
       <sprite>sprites\sFade</sprite>
+      <sprites name="MainMenu">
+        <sprite>sprites\sSelection</sprite>
+      </sprites>
     </sprites>
     <sprites name="Blocks">
       <sprite>sprites\sBlock</sprite>
@@ -58,9 +61,22 @@
   <shaders name="shaders">
     <shader type="GLSLES">shaders\shd_Pause.shader</shader>
   </shaders>
+  <fonts name="fonts">
+    <font>fonts\font12</font>
+    <font>fonts\font20</font>
+    <font>fonts\font20B</font>
+  </fonts>
   <objects name="objects">
     <objects name="Managers">
       <object>objects\oManager</object>
+      <objects name="MainMenu">
+        <object>objects\oMenuPlay</object>
+        <object>objects\oMenuOptions</object>
+        <object>objects\oMenuCredits</object>
+        <object>objects\oMenuQuit</object>
+        <object>objects\oChoose</object>
+        <object>objects\oOptions</object>
+      </objects>
       <objects name="Pause">
         <object>objects\oPause</object>
         <object>objects\oEnableShader_5002</object>
@@ -69,8 +85,10 @@
       </objects>
       <object>objects\oEndLevel</object>
       <object>objects\oFadeInBlack</object>
+      <object>objects\oJustFade</object>
       <object>objects\oNextLevel</object>
       <object>objects\oFadeOutBlack</object>
+      <object>objects\oCredits</object>
     </objects>
     <objects name="Enemies">
       <object>objects\oEnemy</object>
@@ -122,6 +140,8 @@
     <room>rooms\room_preload</room>
     <room>rooms\room_Menu</room>
     <room>rooms\room3</room>
+    <room>rooms\room_credits</room>
+    <room>rooms\room_template</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>

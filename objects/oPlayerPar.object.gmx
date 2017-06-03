@@ -218,12 +218,11 @@ x+=vxNew;
 //Reset the movement with the platforms
 if(place_meeting(x, y+1, oPlatformH1)){
     platform=instance_place(x, y+1, oPlatformH1)
+    if(platform.hspeed!=0){
     vx-=platform.vx;
+    }
 }
-/*if(place_meeting(x, y+1, oPlatformV1)){
-    platform=instance_place(x, y+1, oPlatformV1)
-    vy-=platform.vy;
-}*/
+
 
 </string>
           </argument>
@@ -354,10 +353,12 @@ if((!kRight &amp;&amp; !kLeft) || !canMove){
 //Move along the platforms
 //Horizontal
 if(place_meeting(x, y+1, oPlatformH1)){
-    platform=instance_place(x, y+1, oPlatformH1)
-    vx+=platform.vx;
+    platform=instance_place(x, y+1, oPlatformH1);
+    if(platform.hspeed!=0){
+        vx+=platform.vx;
+    }
 }
-//Vertical
+//Vertical [in the platform]
 
 
 
