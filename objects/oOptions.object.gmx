@@ -99,6 +99,11 @@ if(kEsc){
     if(room==room_Menu){
         room_restart();
     }else{
+        if(instance_exists(oPauseMenu)){
+            //oPauseMenu.canEnter=false; 
+            oPauseMenu.alarm[0]=1;
+            oPauseMenu.options=false;
+        }
         instance_destroy();
     }
 }

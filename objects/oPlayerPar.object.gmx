@@ -82,7 +82,60 @@ DEAD=false;
 
 onGround = OnGround();
 
+idlex=0;
+grow=false;
+IDLE=false;
 
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="2">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///IDLE=false;
+
+IDLE=false;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="1">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///IDLE=true;
+
+IDLE=true;
 </string>
           </argument>
         </arguments>
@@ -174,7 +227,18 @@ if(yDifference&lt;=0){
     move_outside_solid(270, 5);    
 }
 
-
+if(place_meeting(x, y, oBlock)){
+    inst=instance_place(x, y, oBlock)
+    with(inst){
+        centerX=x+sprite_width/2;
+    }
+    xDifference=x-inst.centerX;
+    if(xDifference&lt;=0){
+        move_outside_solid(180, 5);
+    }else{
+        move_outside_solid(0, 5);
+    }
+}
 
 
 
@@ -220,7 +284,7 @@ x+=vxNew;
 if(place_meeting(x, y+1, oPlatformH1)){
     platform=instance_place(x, y+1, oPlatformH1)
     if(platform.hspeed!=0){
-    vx-=platform.vx;
+    vx-=platform.hspeed;
     }
 }
 
@@ -253,6 +317,10 @@ if(place_meeting(x, y+1, oPlatformH1)){
     DEAD=true;
 }*/
 
+//Fall into the void
+if(y&gt;room_height+200){
+    DEAD=true;
+}
 //Spikes
 if(canDie){
     if(place_meeting(x, y, oHazardPar)){
@@ -363,13 +431,16 @@ if((!kRight &amp;&amp; !kLeft) || !canMove){
 if(place_meeting(x, y+1, oPlatformH1)){
     platform=instance_place(x, y+1, oPlatformH1);
     if(platform.hspeed!=0){
-        vx+=platform.vx;
+        vx+=platform.hspeed;
     }
 }
 //Vertical [in the platform]
 
-
-
+//stop idle animation
+if(vx!=0||vy!=0) {
+    IDLE=false;
+    idlex=0;
+}
 </string>
           </argument>
         </arguments>
@@ -509,7 +580,34 @@ draw_text (50, 65, vy);
             <kind>1</kind>
             <string>///"Animation"
 
-if (vy != 0){
+if(IDLE){
+    if(idlex&lt;=-2){
+        grow=true;
+    }else if(idlex&gt;=2){
+        grow=false;
+    }
+    
+    if(grow){
+        idlex+=0.2;
+    }else{
+        idlex-=0.2;
+    }
+    
+    x1=(x-sprite_width/2)-idlex;
+    y1=(y-sprite_height)+idlex;
+    x2=(x+sprite_width/2)+idlex;
+    y2=(y-sprite_height)+idlex;
+    x3=(x+sprite_width/2)+idlex;
+    y3=y;
+    x4=(x-sprite_width/2)-idlex;
+    y4=y;
+    
+    if(alarm[2]==-1){
+        alarm[2]=60;
+    }
+    
+    draw_sprite_pos(sprite_index, 0, x1, y1, x2, y2, x3, y3, x4, y4, 1);
+}else if (vy != 0){
     x1=(x-sprite_width/2);
     y1=(y-sprite_height)-vy;
     x2=(x+sprite_width/2);
@@ -533,6 +631,7 @@ if (vy != 0){
     draw_sprite_pos(sprite_index, 0, x1, y1, x2, y2, x3, y3, x4, y4, 1);
 }else{
     draw_self();
+    if(alarm[1]==-1) alarm[1]=random_range(200, 500);
 }
 
 </string>

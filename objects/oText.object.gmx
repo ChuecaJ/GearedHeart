@@ -44,10 +44,22 @@ case room_Menu:
     text="Estamos en el menu";
     break;
 case roomFirst:
-    text="MOVE!";
+    text="Nivel1";
+    break;
+case room2:
+    text="Nivel2";
     break;
 case room3:
-    text="Nivel 3";
+    text="Nivel3";
+    break;
+case room4:
+    text="Nivel4";
+    break;
+case room5:
+    text="Nivel5";
+    break;
+case room6:
+    text="Nivel6";
     break;
 }
 

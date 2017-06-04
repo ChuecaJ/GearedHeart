@@ -43,19 +43,19 @@ case 0:
     color=make_colour_rgb(36, 86, 17);//Verde
     break;
 case 1:
-    color=make_colour_rgb(33, 62, 127);//Azul
+    color=make_colour_rgb(33, 62, 127);//Azul oscuro
     break;
 case 2:
-    color=make_colour_rgb(181, 58, 65);//Rojo
+    color=make_colour_rgb(114, 0, 7);//Rojo
     break;
 case 3:
-    color=make_colour_rgb(117, 73, 140);//Morado
+    color=make_colour_rgb(124, 36, 170);//Morado
     break;
 case 4:
-    color=make_colour_rgb(50, 186, 154);//Cian
+    color=make_colour_rgb(0, 158, 150);//Turquesa
     break;
 default:
-    color=make_colour_rgb(90, 90, 90);//Gris
+    color=make_colour_rgb(90, 90, 90);//Gris, no debería salir
 }
 </string>
           </argument>

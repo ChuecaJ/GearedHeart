@@ -98,6 +98,14 @@ if(place_meeting(x, y-1, oBox)){
     }
 }
 
+//Destroy
+if(place_meeting(x, y, oDestroy)){
+    if(audio_is_playing(sndPlatform)){
+        audio_stop_sound(sndPlatform);
+    }
+    instance_destroy();
+}
+
 </string>
           </argument>
         </arguments>

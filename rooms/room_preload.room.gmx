@@ -10,16 +10,7 @@
   <persistent>0</persistent>
   <colour>12632256</colour>
   <showcolour>-1</showcolour>
-  <code>window_set_fullscreen(true);
-
-global.pause = false;
-global.sounds = true;
-global.music = true;
-global.fullscreen = true;
-
-
-
-room_goto_next();</code>
+  <code>preload();</code>
   <enableViews>-1</enableViews>
   <clearViewBackground>-1</clearViewBackground>
   <clearDisplayBuffer>-1</clearDisplayBuffer>

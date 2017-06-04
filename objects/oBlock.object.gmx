@@ -3,7 +3,7 @@
   <spriteName>sBlock</spriteName>
   <solid>-1</solid>
   <visible>-1</visible>
-  <depth>-5001</depth>
+  <depth>-1000</depth>
   <persistent>0</persistent>
   <parentName>oEntityPar</parentName>
   <maskName>&lt;undefined&gt;</maskName>

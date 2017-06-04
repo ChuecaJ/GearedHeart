@@ -3,7 +3,7 @@
   <spriteName>sAnakle</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>-10</depth>
+  <depth>-10000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -51,7 +51,10 @@ heightTarget = sprite_get_height(objectTarget.sprite_index);
 distToTargetX = 0;
 distToTargetY = 0;
 distToTarget  = 0
-limitRadius = 200;
+limitRadius = 300;
+
+image_xscale=.5;
+image_yscale=.5;
 
 </string>
           </argument>
@@ -226,8 +229,24 @@ if(canMove){
           <argument>
             <kind>1</kind>
             <string>
-draw_self();
-
+if(vx!=0||vy!=0){
+    x1=(x-sprite_width/2)-vx/2;
+    y1=(y-sprite_height/2)-vy/2;
+    x2=(x+sprite_width/2)-vx/2;
+    y2=(y-sprite_height/2)+vy/2;
+    x3=(x+sprite_width/2)+vx/2;
+    y3=(y+sprite_height/2)+vy/2;
+    x4=(x-sprite_width/2)+vx/2;
+    y4=(y+sprite_height/2)-vy/2;
+    
+    image_yscale=.5;
+    if(vx&lt;0)image_xscale=-.5;
+    else image_xscale=.5;
+    
+    draw_sprite_pos(sprite_index, 0, x1, y1, x2, y2, x3, y3, x4, y4, 1);
+}else{
+    draw_self();
+}
 
 </string>
           </argument>

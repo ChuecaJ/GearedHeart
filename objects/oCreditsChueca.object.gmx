@@ -67,7 +67,7 @@ Level Designer";
             <kind>1</kind>
             <string>
 if(place_meeting(x, y, oAnakle)){
-    if(!audio_is_playing(sndCheerChueca)&amp;&amp;global.music&amp;&amp;!played){
+    if(!audio_is_playing(sndCheerChueca)&amp;&amp;!global.music&amp;&amp;!global.sounds&amp;&amp;!played){
         audio_play_sound(sndCheerChueca, 1, false);
     }
     pop=true;

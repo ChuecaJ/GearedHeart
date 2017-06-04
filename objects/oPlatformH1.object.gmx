@@ -78,6 +78,13 @@ if(place_meeting(x+vx, y, oChangeDirection)){
     vx*=-1;
 }
 
+//Destroy
+if(place_meeting(x, y, oDestroy)){
+    if(audio_is_playing(sndPlatform)){
+        audio_stop_sound(sndPlatform);
+    }
+    instance_destroy();
+}
 </string>
           </argument>
         </arguments>

@@ -64,7 +64,7 @@ text="Alberto Sanchez
             <kind>1</kind>
             <string>
 if(place_meeting(x, y, oAnakle)){
-    if(!audio_is_playing(sndCheerAlboroto)&amp;&amp;global.music&amp;&amp;!played){
+    if(!audio_is_playing(sndCheerAlboroto)&amp;&amp;!global.music&amp;&amp;!global.sounds&amp;&amp;!played){
         audio_play_sound(sndCheerAlboroto, 1, false);
     }
     pop=true;
