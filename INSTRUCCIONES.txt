@@ -1,0 +1,12 @@
+El ejecutable del juego es AnakleTheMindfucker.exe
+
+Movimiento: WASD + espacio
+Sacar y meter Anakle: E
+Pausa: ESC
+
+Realizado por:
+Jorge Chueca
+Eduardo Cebollero
+Julia del Río
+
+Esperamos que te guste [el último nivel se puede pasar].

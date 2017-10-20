@@ -27,7 +27,7 @@
             <kind>1</kind>
             <string>event_inherited();
 
-jumpHeight = 8.5;
+jumpHeight = 9.5;
 
 vxMax = 12.5;
 

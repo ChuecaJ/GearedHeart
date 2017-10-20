@@ -60,6 +60,7 @@
       <sprite>sprites\sButton</sprite>
       <sprite>sprites\sDoor</sprite>
       <sprite>sprites\sPlatformH3</sprite>
+      <sprite>sprites\sPlatformH2</sprite>
       <sprite>sprites\sStop</sprite>
       <sprite>sprites\sprite24</sprite>
       <sprite>sprites\sDestroy</sprite>
@@ -87,6 +88,7 @@
     <objects name="Managers">
       <object>objects\oManager</object>
       <object>objects\oEndLevel</object>
+      <object>objects\oText</object>
       <objects name="Credits">
         <object>objects\oCreditsChueca</object>
         <object>objects\oCreditsEdu</object>
@@ -113,7 +115,6 @@
         <object>objects\oNextLevel</object>
         <object>objects\oFadeOutBlack</object>
       </objects>
-      <object>objects\oText</object>
     </objects>
     <objects name="Blocks">
       <object>objects\oBlock</object>
@@ -151,7 +152,9 @@
       <object>objects\oPlatformH3</object>
       <object>objects\oButton4</object>
       <object>objects\oDoor4</object>
+      <object>objects\oDoor4_2</object>
       <object>objects\oPlatformV4</object>
+      <object>objects\oPlatformV4_1</object>
       <object>objects\oPlatformH4</object>
       <object>objects\oStop</object>
       <object>objects\oDestroy</object>
@@ -167,6 +170,12 @@
     <room>rooms\room4</room>
     <room>rooms\room5</room>
     <room>rooms\room6</room>
+    <room>rooms\room7</room>
+    <room>rooms\room8</room>
+    <room>rooms\room10</room>
+    <room>rooms\room11</room>
+    <room>rooms\room13</room>
+    <room>rooms\room15</room>
     <room>rooms\room_credits</room>
     <room>rooms\room_template</room>
   </rooms>

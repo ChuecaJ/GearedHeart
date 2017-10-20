@@ -3,7 +3,7 @@
   <spriteName>sText</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-11111</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -41,25 +41,49 @@ text="Blank";
 //Choose the text for the room
 switch(room){
 case room_Menu:
-    text="Estamos en el menu";
+    text="TEST MENU";
     break;
 case roomFirst:
-    text="Nivel1";
+    text="Anakle, an alien interested in science, despised by his own race, wanted to do something big.";
     break;
 case room2:
-    text="Nivel2";
+    text="He began to build a machine to travel between dimensions in order to escape from his race.
+    And landed in the geometric dimension.";
     break;
 case room3:
-    text="Nivel3";
+    text="Anakle, had the amazing ability to control objects and people getting into their bodies.
+    [press e]";
     break;
 case room4:
-    text="Nivel4";
+    text="Anakle's race was narcissistic. He was just like them, but he preferred to be separated from all.";
     break;
 case room5:
-    text="Nivel5";
+    text="Anakle was beginning to get depressed in that dimension. He felt that the objects were there to help him. He wanted to leave.";
     break;
 case room6:
-    text="Nivel6";
+    text="He realized that nothing he brought with him was in that instant. He could only continue thanks to the the squares. He hated them.";
+    break;
+case room7:
+    text="Anakle didn't assimilate what was happening. He refused: ''I'm fine, this can't be happening to me.''";
+    break;
+case room8:
+    text="He tried to find the easiest and quickest way out to end his suffering, but he didn't get anything. In his head there were voices: 
+''Why me?''
+''It's not fair!''";
+    break;
+case room10:
+    text="His mental state was getting worse and he began to rave:
+''I'm going to die here, I would do anything for a couple more years…’’.";
+    break;
+case room11:
+    text="Anakle was already beginning to give up. ’’What am I looking for?’’";
+    break;
+case room13:
+    text="Anakle realized that he was the problem.";
+    break;
+case room15:
+    text="He had achieved his goal, to stay away from his race, and had finally found it. 
+But it felt as empty as always.";
     break;
 }
 

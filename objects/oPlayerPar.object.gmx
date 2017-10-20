@@ -240,8 +240,18 @@ if(place_meeting(x, y, oBlock)){
     }
 }
 
+if(place_meeting(x, y, oPlatformH1)){
+    x+=2;
+}
 
 
+if(place_meeting(x, y, oPlatformV1)){
+    y-=2;
+}
+
+if(place_meeting(x, y, oDoor1)){
+    y+=3;
+}
 
 
 </string>
